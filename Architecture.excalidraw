@@ -1392,6 +1392,36 @@
       "originalText": "RAG",
       "autoResize": true,
       "lineHeight": 1.15
+    },
+    {
+      "id": "kixeyeMmPzwoF5JQ9v-uB",
+      "type": "rectangle",
+      "x": 103,
+      "y": -266.5,
+      "width": 881,
+      "height": 677.9999999999999,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aa",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1064158311,
+      "version": 605,
+      "versionNonce": 583059273,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1776790865107,
+      "link": null,
+      "locked": false
     }
   ],
   "appState": {
