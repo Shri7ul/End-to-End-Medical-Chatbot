@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MedAI Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="header">
+        <div class="logo">🧠 MedAI</div>
+        <div class="pulse"></div>
+    </div>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <form id="messageArea" class="input-area">
+        <input type="text" id="text" name="msg" placeholder="Ask anything..." autocomplete="off" required />
+        <button type="submit">➤</button>
+    </form>
+
+</div>
+
+<script>
+$(document).ready(function() {
+
+    $("#messageArea").on("submit", function(event) {
+
+        var rawText = $("#text").val();
+
+        var userHtml = `<div class="message user">${rawText}</div>`;
+        $("#chat-box").append(userHtml);
+        $("#text").val("");
+
+        var typingHtml = `
+        <div class="message bot typing">
+            <span></span><span></span><span></span>
+        </div>`;
+        
+        $("#chat-box").append(typingHtml);
+
+        $.ajax({
+            data: { msg: rawText },
+            type: "POST",
+            url: "/get",
+        }).done(function(data) {
+
+            $(".typing").remove();
+
+            var botHtml = `<div class="message bot">${data}</div>`;
+            $("#chat-box").append(botHtml);
+
+            $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+        });
+
+        event.preventDefault();
+    });
+
+});
+</script>
+
+</body>
+</html>
