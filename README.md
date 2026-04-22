@@ -1,133 +1,178 @@
-# End-to-End-Medical-Chatbot
 
-# How to run?
-### STEPS:
+# 🧠 End-to-End Medical Chatbot
 
-Clone the repository
+An AI-powered medical assistant that uses **RAG (Retrieval-Augmented Generation)** to provide accurate, context-aware responses based on medical knowledge.
+
+Built with a focus on **real-world usability, scalability, and production deployment**.
+
+---
+
+## 🚀 Features
+
+* 💬 AI-powered medical chatbot (context-aware responses)
+* 📚 Semantic search using vector embeddings
+* 🧠 RAG pipeline with external knowledge retrieval
+* ⚡ Fast API responses with optimized backend
+* ☁️ Ready for cloud deployment (AWS + Docker + CI/CD)
+
+---
+
+## 🛠 Tech Stack
+
+* Python
+* Flask
+* LangChain
+* OpenAI (LLM)
+* Pinecone (Vector DB)
+* Docker
+* AWS (EC2, ECR)
+* GitHub Actions (CI/CD)
+
+---
+
+## ⚙️ How to Run Locally
+
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/Shri7ul/End-to-End-Medical-Chatbot.git
-```
-``` bash
 cd End-to-End-Medical-Chatbot
 ```
-### STEP 01- Create a conda environment after opening the repository
+
+---
+
+### 2. Create Virtual Environment
 
 ```bash
 conda create -n medibot python=3.10 -y
-```
-
-
-```bash
 conda activate medibot
 ```
 
-### STEP 02- install the requirements
+---
+
+### 3. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Create a `.env` file in the root directory and add your Pinecone & openai credentials as follows:
+---
+
+### 4. Setup Environment Variables
+
+Create a `.env` file in the root directory:
 
 ```ini
-PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-OPENAI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+PINECONE_API_KEY=your_pinecone_api_key
+OPENAI_API_KEY=your_openai_api_key
 ```
 
+---
+
+### 5. Store Embeddings
 
 ```bash
-# run the following command to store embeddings to pinecone
 python store_index.py
 ```
 
+---
+
+### 6. Run Application
+
 ```bash
-# Finally run the following command
 python app.py
 ```
 
-Now,
-```bash
-open up localhost:
+Open in browser:
+
+```
+http://localhost:5000
 ```
 
+---
 
+## ☁️ AWS + Docker + CI/CD Deployment (Future Integration)
 
-### Techstack Used:
+### 🔐 IAM Setup
 
-- Python
-- LangChain
-- Flask
-- GPT
-- Pinecone
+Create an IAM user with:
 
+* AmazonEC2FullAccess
+* AmazonEC2ContainerRegistryFullAccess
 
+---
 
-# AWS-CICD-Deployment-with-Github-Actions
+### 📦 ECR (Elastic Container Registry)
 
-## 1. Login to AWS console.
+* Create a repository
+* Save the repository URI
 
-## 2. Create IAM user for deployment
+---
 
-	#with specific access
+### 🖥 EC2 Setup
 
-	1. EC2 access : It is virtual machine
+Launch Ubuntu EC2 and install Docker:
 
-	2. ECR: Elastic Container registry to save your docker image in aws
+```bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
 
-	#Description: About the deployment
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
 
-	1. Build docker image of the source code
+---
 
-	2. Push your docker image to ECR
+### 🔁 CI/CD Pipeline (GitHub Actions)
 
-	3. Launch Your EC2 
+Workflow:
 
-	4. Pull Your image from ECR in EC2
+1. Build Docker image
+2. Push to ECR
+3. Pull on EC2
+4. Run container
 
-	5. Lauch your docker image in EC2
+---
 
-	#Policy:
+### 🔑 GitHub Secrets Required
 
-	1. AmazonEC2ContainerRegistryFullAccess
+* `AWS_ACCESS_KEY_ID`
+* `AWS_SECRET_ACCESS_KEY`
+* `AWS_DEFAULT_REGION`
+* `ECR_REPO`
+* `PINECONE_API_KEY`
+* `OPENAI_API_KEY`
 
-	2. AmazonEC2FullAccess
+---
 
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
+## 📈 Project Architecture
 
-	
-## 4. Create EC2 machine (Ubuntu) 
+* Document ingestion → Chunking → Embedding
+* Vector storage (Pinecone)
+* Query → Semantic retrieval
+* Context + LLM → Final response
 
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
+---
 
-	sudo apt-get update -y
+## 🎯 Learning Outcomes
 
-	sudo apt-get upgrade
-	
-	#required
+* End-to-end RAG system design
+* Vector databases & embeddings
+* API + backend structuring
+* Production deployment workflow
+* CI/CD automation
 
-	curl -fsSL https://get.docker.com -o get-docker.sh
+---
 
-	sudo sh get-docker.sh
+## 👤 Author
 
-	sudo usermod -aG docker ubuntu
+**Shriful Islam (InHuman)**
 
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
+---
 
+## ⭐ Support
 
-# 7. Setup github secrets:
-
-   - AWS_ACCESS_KEY_ID
-   - AWS_SECRET_ACCESS_KEY
-   - AWS_DEFAULT_REGION
-   - ECR_REPO
-   - PINECONE_API_KEY
-   - OPENAI_API_KEY
+If you find this project useful, consider giving it a ⭐ on GitHub.
