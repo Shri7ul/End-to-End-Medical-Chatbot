@@ -30,6 +30,12 @@ Built with a focus on **real-world usability, scalability, and production deploy
 
 ---
 
+## 🖼️ Demo Video
+
+[*Click Here*](https://www.linkedin.com/feed/update/urn:li:activity:7452691448363130880/)
+
+---
+
 ## ⚙️ How to Run Locally
 
 ### 1. Clone Repository
