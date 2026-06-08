@@ -92,7 +92,7 @@ python app.py
 Open in browser:
 
 ```
-http://localhost:5000
+http://localhost:8080
 ```
 
 ---
