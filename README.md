@@ -97,62 +97,90 @@ http://localhost:5000
 
 ---
 
-## ☁️ AWS + Docker + CI/CD Deployment (Future Integration)
+# AWS-CICD-Deployment-with-Github-Actions
 
-### 🔐 IAM Setup
+## 1. Login to AWS console.
 
-Create an IAM user with:
+## 2. Create IAM user for deployment
 
-* AmazonEC2FullAccess
-* AmazonEC2ContainerRegistryFullAccess
+	#with specific access
 
----
+	1. EC2 access : It is virtual machine
 
-### 📦 ECR (Elastic Container Registry)
+	2. ECR: Elastic Container registry to save your docker image in aws
 
-* Create a repository
-* Save the repository URI
 
----
+	#Description: About the deployment
 
-### 🖥 EC2 Setup
+	1. Build docker image of the source code
 
-Launch Ubuntu EC2 and install Docker:
+	2. Push your docker image to ECR
 
-```bash
-sudo apt-get update -y
-sudo apt-get upgrade -y
+	3. Launch Your EC2 
 
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+	4. Pull Your image from ECR in EC2
 
-sudo usermod -aG docker ubuntu
-newgrp docker
-```
+	5. Lauch your docker image in EC2
 
----
+	#Policy:
 
-### 🔁 CI/CD Pipeline (GitHub Actions)
+	1. AmazonEC2ContainerRegistryFullAccess
 
-Workflow:
+	2. AmazonEC2FullAccess
 
-1. Build Docker image
-2. Push to ECR
-3. Pull on EC2
-4. Run container
+	
+## 3. Create ECR repo to store/save docker image
+    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medibot
 
----
+	
+## 4. Create EC2 machine (Ubuntu) 
 
-### 🔑 GitHub Secrets Required
+## 5. Open EC2 and Install docker in EC2 Machine:
+	
+	
+	#optinal
 
-* `AWS_ACCESS_KEY_ID`
-* `AWS_SECRET_ACCESS_KEY`
-* `AWS_DEFAULT_REGION`
-* `ECR_REPO`
-* `PINECONE_API_KEY`
-* `OPENAI_API_KEY`
+	sudo apt-get update -y
 
----
+	sudo apt-get upgrade
+	
+	#required
+
+	curl -fsSL https://get.docker.com -o get-docker.sh
+
+	sudo sh get-docker.sh
+
+	sudo usermod -aG docker ubuntu
+
+	newgrp docker
+	
+# 6. Configure EC2 as self-hosted runner:
+    setting>actions>runner>new self hosted runner> choose os> then run command one by one
+
+
+# 7. Setup github secrets:
+
+   - AWS_ACCESS_KEY_ID
+   - AWS_SECRET_ACCESS_KEY
+   - AWS_DEFAULT_REGION
+   - ECR_REPO
+   - PINECONE_API_KEY
+   - OPENAI_API_KEY
+
+
+## Deployment Evidence
+
+### AWS EC2 Instance
+![EC2](docs/screenshots/aws-ec2-instance.png)
+
+### AWS ECR Instance
+![EC2](docs/screenshots/aws-ecr.png)
+
+### GitHub Actions Runner
+![Runner](docs/screenshots/github-runner-setup.png)
+
+### Running Application
+![App](docs/screenshots/deployed-application.png)
 
 ## 📈 Project Architecture
 
